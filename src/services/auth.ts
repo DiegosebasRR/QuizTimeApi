@@ -10,6 +10,7 @@ const registerNewUser = async ({
   lastname,
   email,
   password,
+  image,
 }: User) => {
   const userExists = await UserModel.findOne({ email });
   if (userExists) return "User_exists";
@@ -19,6 +20,7 @@ const registerNewUser = async ({
     lastname,
     email,
     password: passHash,
+    image,
   });
   return registerNewUser;
 };

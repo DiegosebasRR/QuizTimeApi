@@ -7,17 +7,23 @@ const createQuestionnaire = async (questionnaire: Questionnaire) => {
 };
 
 const getQuestionnaires = async () => {
-  const responseGet = await QuestionnaireModel.find({});
+  const responseGet = await QuestionnaireModel.find({})
+    .populate("question")
+    .populate("participant");
   return responseGet;
 };
 
 const getQuestionnaire = async (id: string) => {
-  const responseGet = await QuestionnaireModel.findOne({ _id: id });
+  const responseGet = await QuestionnaireModel.findOne({ _id: id })
+    .populate("question")
+    .populate("participant");
   return responseGet;
 };
 
 const getUserQuestionnaires = async (userId: string) => {
-  const responseGet = await QuestionnaireModel.find({ userId: userId });
+  const responseGet = await QuestionnaireModel.find({
+    userId: userId,
+  }).populate("question");
   return responseGet;
 };
 

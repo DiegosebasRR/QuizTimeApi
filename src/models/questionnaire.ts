@@ -4,12 +4,22 @@ import { model, Schema } from "mongoose";
 const QuestionnaireSchema = new Schema<Questionnaire>({
   titles: { type: String, required: true },
   description: { type: String, required: true },
-  duration: { type: Number, required: true },
   userId: { type: String, required: true },
-  participants: { type: Array<String> },
-  questions: { type: Array<String> },
+  question: [{ type: Schema.Types.ObjectId, ref: "question", required: true }],
+  participant: [
+    { type: Schema.Types.ObjectId, ref: "participant", required: true },
+  ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date },
+  image: {
+    secure_url: String,
+    public_id: String,
+  },
 });
-
-const QuestionnaireModel = model("Questionnaire", QuestionnaireSchema);
+QuestionnaireSchema.pre("save", function (next) {
+  this.updatedAt = new Date();
+  next();
+});
+const QuestionnaireModel = model("questionnaire", QuestionnaireSchema);
 
 export default QuestionnaireModel;

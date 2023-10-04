@@ -6,6 +6,10 @@ const UserSchema = new Schema<User>({
   lastname: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  image: {
+    secure_url: String,
+    public_id: String,
+  },
 });
 
 const UserModel = model("user", UserSchema);

@@ -1,8 +1,12 @@
+import { Types } from "mongoose";
+
 export interface Questionnaire {
   titles: string;
   description: string;
-  duration: number;
+  question: Array<Types.ObjectId>;
+  participant: Array<Types.ObjectId>;
   userId: string;
-  participants?: Array<String>;
-  questions?: Array<String>;
+  createdAt: Date;
+  updatedAt: Date;
+  image: any;
 }
